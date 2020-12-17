@@ -1,43 +1,59 @@
 {
-  "regedProg": [
-    {
-      "Time": "2020-12-17T19:40:03.147Z",
-      "cont": "asdf",
-      "prog": "SongARB",
-      "catagory": "THANIYA",
-      "house": "AMPHAN"
-    },
-    {
-      "Time": "2020-12-17T19:42:31.985Z",
-      "cont": "sfasdf",
-      "prog": "SongMLM",
-      "catagory": "ALIYA",
-      "house": "AMPHAN"
-    },
-    {
-      "Time": "2020-12-17T19:42:34.103Z",
-      "cont": "sfasdfaf",
-      "prog": "SongMLM",
-      "catagory": "ALIYA",
-      "house": "AMPHAN"
-    }
-  ],
+  "regedProg": [],
   "programs": [
     {
-      "Name": "SongMLM",
+      "Name": "Song Malayalam",
+      "catagory": "BIDAYA"
+    },
+    {
+      "Name": "Song mlm",
+      "catagory": "UOOLA"
+    },
+    {
+      "Name": "Song urdu",
+      "catagory": "UOOLA"
+    },
+    {
+      "Name": "Song eng",
+      "catagory": "UOOLA"
+    },
+    {
+      "Name": "Song arb",
+      "catagory": "UOOLA"
+    },
+    {
+      "Name": "Song mlm",
       "catagory": "THANIYA"
     },
     {
-      "Name": "SongMLM",
-      "catagory": "ALIYA"
+      "Name": "Song Arabic",
+      "catagory": "THANIYA"
     },
     {
-      "Name": "SongARB",
+      "Name": "Song English",
       "catagory": "THANIYA"
+    },
+    {
+      "Name": "Song & Speech (offline)",
+      "catagory": "THANIYA"
+    },
+    
+    {
+      "Name": "Kadhakadhana",
+      "catagory": "BIDAYA"
+    },{
+      "Name": "Poem Recitation Malayalam",
+      "catagory": "UOOLA"
+    },{
+      "Name": "Poem Recitation Malayalam",
+      "catagory": "BIDAYA"
     }
+    
   ],
   "catagories": [
     "THANIYA",
-    "ALIYA"
+    "ALIYA",
+    "UOOLA",
+    "BIDAYA"
   ]
 }
