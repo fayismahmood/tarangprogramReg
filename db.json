@@ -1,5 +1,27 @@
 {
-  "regedProg": [],
+  "regedProg": [
+    {
+      "Time": "2020-12-17T19:40:03.147Z",
+      "cont": "asdf",
+      "prog": "SongARB",
+      "catagory": "THANIYA",
+      "house": "AMPHAN"
+    },
+    {
+      "Time": "2020-12-17T19:42:31.985Z",
+      "cont": "sfasdf",
+      "prog": "SongMLM",
+      "catagory": "ALIYA",
+      "house": "AMPHAN"
+    },
+    {
+      "Time": "2020-12-17T19:42:34.103Z",
+      "cont": "sfasdfaf",
+      "prog": "SongMLM",
+      "catagory": "ALIYA",
+      "house": "AMPHAN"
+    }
+  ],
   "programs": [
     {
       "Name": "SongMLM",

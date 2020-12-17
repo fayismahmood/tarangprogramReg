@@ -6,10 +6,13 @@ import openSocket from 'socket.io-client';
 import jwt from "jsonwebtoken"
 
 
-const  socket = openSocket('http://localhost:4000');
+const  socket = openSocket('/');
 
 export default function Reg() {
-    let house=location.search.match(/h=(.*)/)[1]
+   // console.log(jwt.sign({house:location.search.match(/h=(.*)/)[1] },"token"));
+    let houseData = jwt.verify(location.search.match(/h=(.*)/)[1],"token" );
+    let house=houseData.house
+    
     let [data,setData]=useState(null)
     let [Cat,setCat]=useState(null)
     let [Prog,setProg]=useState(null)
@@ -77,6 +80,7 @@ export default function Reg() {
                             })}
                         </Nav>
                     </Navbar>
+                    <h1>{house}</h1>
                     {Prog&&
                         <div className="_prg">
                             <div>
@@ -98,7 +102,7 @@ export default function Reg() {
                                     
                                         
                                         <div className="rgProgs">
-                                            <h6>My Progradfasdfa</h6>
+                                            <h6>Registered by {house}</h6>
                                             {filterRegedProg().filter(e=>e.house==house).map(e=>{
                                                 return(
                                                     <div className="card">{e.cont}</div>
@@ -109,7 +113,7 @@ export default function Reg() {
                                     
                                 </div>    
                                 <div>
-                                    <h6>Add HHHHHHHHHHH</h6>
+                                    <h6>Register Your </h6>
                                     <Input onChange={(e)=>{InputVal=e}} componentClass="textarea" placeholder="Textarea" />
                                     <Button onClick={()=>{
                                         axios.post("./crud/",{
