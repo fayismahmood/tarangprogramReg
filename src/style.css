@@ -1,0 +1,37 @@
+.card{
+    border-radius: 5px;
+    box-shadow: 0 4px 10px #d6d3ee;
+    word-wrap: break-word;
+    text-align: center;
+    background: white;
+    padding: 5px;
+    margin: 5px;
+}
+._prg{
+    background: #edecf6;
+}
+._prg>div{
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+.griddd{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.rgProgs{
+    padding: 10px 10px;
+    display: grid;
+    grid-template-columns:repeat(auto-fit,300px);
+    height:100%;
+    overflow: auto;
+   
+}
+._Cont{
+   background: linear-gradient(40deg,rgb(245, 239, 186),rgb(255, 197, 171));
+}
+._prg{
+    padding: 30px;
+}
+h6{
+    text-align: center;
+}

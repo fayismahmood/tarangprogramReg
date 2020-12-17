@@ -1,0 +1,147 @@
+import React,{useEffect,useState} from 'react'
+import axios from 'axios'
+import {InputPicker,Loader,Nav,Input,Tag, Button, Navbar} from "rsuite"
+import { func } from 'prop-types'
+import openSocket from 'socket.io-client';
+import jwt from "jsonwebtoken"
+
+
+const  socket = openSocket('http://localhost:4000');
+
+export default function Reg() {
+    let house=location.search.match(/h=(.*)/)[1]
+    let [data,setData]=useState(null)
+    let [Cat,setCat]=useState(null)
+    let [Prog,setProg]=useState(null)
+   
+
+    useEffect(e=>{
+        axios.get("/getRegProgs").then(res=>{
+            setData(res.data)
+        })
+        console.log(house);
+        
+    },[])
+    useEffect(e=>{
+        console.log(data);
+        let handler=(e)=>{
+            let ThData={...data}
+            console.log(ThData);
+            ThData.regedProg.push(e)
+           
+    
+            setData(ThData)
+        }
+        socket.on("added",handler)
+        return () => {
+            socket.off('added', handler);
+          }
+    },[data])
+    function filterCat(){
+        if(Cat){
+            return data.programs.filter(e=>e.catagory==Cat)
+        }else{
+            return []
+        }
+    }
+    function filterRegedProg(){
+        if(Prog){
+            
+            return data.regedProg.filter(e=>e.catagory==Cat).filter(e=>e.prog==Prog)
+
+        }else{
+            return []
+        }
+    }
+    let InputVal=""
+    return (
+        <div className="_Cont">
+            {!data&&<Loader/>}
+            {
+                data&&
+                <div>
+                    
+                    <Navbar>
+                        <Nav>
+                            <div style={{display:"flex",margin:"10px"}}>
+                                <InputPicker style={{margin:"auto"}} onChange={(e)=>{setCat(e)}} data={RsuitFy(data.catagories)}></InputPicker>
+                            </div>
+                        </Nav>
+                        <Nav onSelect={(e)=>{setProg(e)}}>
+                            {filterCat().map(e=>{
+                            return(
+                                    <Nav.Item eventKey={e.Name}>
+                                        {e.Name}
+                                    </Nav.Item>
+                                )
+                            })}
+                        </Nav>
+                    </Navbar>
+                    {Prog&&
+                        <div className="_prg">
+                            <div>
+                                <div className="griddd">
+                                    <div className="rgProgs">
+                                        <h6>Registered {Prog} for {Cat}</h6>
+
+                                        {filterRegedProg().map(e=>{
+                                            return(
+                                                <div className="card">
+                                                    <p>
+                                                    {e.cont}
+                                                    </p>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                    
+                                    
+                                        
+                                        <div className="rgProgs">
+                                            <h6>My Progradfasdfa</h6>
+                                            {filterRegedProg().filter(e=>e.house==house).map(e=>{
+                                                return(
+                                                    <div className="card">{e.cont}</div>
+                                                )
+                                            })}
+                                        </div>
+                                            
+                                    
+                                </div>    
+                                <div>
+                                    <h6>Add HHHHHHHHHHH</h6>
+                                    <Input onChange={(e)=>{InputVal=e}} componentClass="textarea" placeholder="Textarea" />
+                                    <Button onClick={()=>{
+                                        axios.post("./crud/",{
+                                            action: "Add",
+                                            data: {
+                                                    cont:InputVal,
+                                                    prog:Prog,
+                                                    catagory:Cat,
+                                                    house:house
+                                                }
+                                        })
+                                    }}>Add</Button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    }
+                </div>
+                
+            }
+        </div>
+    )
+}
+
+function RsuitFy(arr){
+    let Arr=[]
+
+    arr.forEach((e,i)=>{
+        Arr[i]={label:e,value:e}
+    })
+
+    return Arr
+}
+
+

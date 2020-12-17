@@ -1,0 +1,21 @@
+{
+  "regedProg": [],
+  "programs": [
+    {
+      "Name": "SongMLM",
+      "catagory": "THANIYA"
+    },
+    {
+      "Name": "SongMLM",
+      "catagory": "ALIYA"
+    },
+    {
+      "Name": "SongARB",
+      "catagory": "THANIYA"
+    }
+  ],
+  "catagories": [
+    "THANIYA",
+    "ALIYA"
+  ]
+}

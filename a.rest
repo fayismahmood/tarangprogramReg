@@ -1,0 +1,15 @@
+POST http://localhost:4000/crud/
+
+###########
+POST http://localhost:4000/crud/ HTTP/1.1
+content-type: application/json
+
+{
+    "action": "Add",
+    "data": {
+            "cont":"waeerwetaesfvsdg sdagsdga",
+            "prog":"SongMLM",
+            "catagory":"THANIYA",
+            "house":"FANI"
+        }
+}
