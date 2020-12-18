@@ -1,10 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
-import {InputPicker,Loader,Nav,Input,Tag, Button, Navbar} from "rsuite"
+import {InputPicker,Loader,Nav,Input,Tag, Button, Navbar, Icon, IconButton} from "rsuite"
 import { func } from 'prop-types'
 import openSocket from 'socket.io-client';
 import jwt from "jsonwebtoken"
 
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import FroalaEditorComponent from 'react-froala-wysiwyg';
 
 const  socket = openSocket('/');
 
@@ -40,6 +43,24 @@ export default function Reg() {
             socket.off('added', handler);
           }
     },[data])
+
+    useEffect(e=>{
+        console.log(data);
+        let handler=(e)=>{
+            let ThData={...data}
+            let Indx=ThData.regedProg.findIndex(_e=>_e.Time==e.Time)
+            console.log("eeeeee",Indx);
+            let qxxx=ThData.regedProg.splice(Indx,1)
+           
+            console.log(ThData,qxxx);
+            setData(ThData)
+        }
+        socket.on("removed",handler)
+        return () => {
+            socket.off('removed', handler);
+          }
+    },[data])
+
     function filterCat(){
         if(Cat){
             return data.programs.filter(e=>e.catagory==Cat)
@@ -90,11 +111,7 @@ export default function Reg() {
 
                                         {filterRegedProg().map(e=>{
                                             return(
-                                                <div className="card">
-                                                    <p>
-                                                    {e.cont}
-                                                    </p>
-                                                </div>
+                                                <div dangerouslySetInnerHTML={{ __html: e.cont }} className="card"></div>
                                             )
                                         })}
                                     </div>
@@ -105,7 +122,19 @@ export default function Reg() {
                                             <h6>Registered by {house}</h6>
                                             {filterRegedProg().filter(e=>e.house==house).map(e=>{
                                                 return(
-                                                    <div className="card">{e.cont}</div>
+                                                    <div className="card">
+                                                        <div className="Head">
+                                                            <IconButton onClick={()=>{
+                                                                axios.post("./crud/",{
+                                                                    action:"Delete",
+                                                                    data:{
+                                                                        Time:e.Time
+                                                                    }
+                                                                })
+                                                            }} icon={<Icon icon="close-circle"></Icon>}></IconButton>
+                                                        </div>
+                                                        <div  dangerouslySetInnerHTML={{ __html: e.cont }} ></div>
+                                                    </div>
                                                 )
                                             })}
                                         </div>
@@ -114,7 +143,7 @@ export default function Reg() {
                                 </div>    
                                 <div>
                                     <h6>Register Your </h6>
-                                    <Input onChange={(e)=>{InputVal=e}} componentClass="textarea" placeholder="Textarea" />
+                                    <FroalaEditorComponent onModelChange={(e)=>{InputVal=e}} tag='textarea'/>
                                     <Button onClick={()=>{
                                         axios.post("./crud/",{
                                             action: "Add",

@@ -28,18 +28,25 @@ io.on('connection', (socket) => {
 
 let crudOp={
     Add:(obj)=>{
+        let NewOBj={
+            Time:new Date(),
+            cont:obj.cont,
+            prog:obj.prog,
+            catagory:obj.catagory,
+            house:obj.house,
+        }
         db.get("regedProg")
         .push(
-            {
-                Time:new Date(),
-                cont:obj.cont,
-                prog:obj.prog,
-                catagory:obj.catagory,
-                house:obj.house,
-            }
+            NewOBj
         ).write()
-        io.sockets.emit("added", obj);
+        io.sockets.emit("added", NewOBj);
         return "Added"
+    },
+    Delete:(obj)=>{
+        let time=obj.Time;
+        db.get("regedProg").remove({Time:time}).write()
+        io.sockets.emit("removed", obj);
+        console.log("dele",time);
     }
 }
 
