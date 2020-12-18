@@ -5,9 +5,8 @@ import { func } from 'prop-types'
 import openSocket from 'socket.io-client';
 import jwt from "jsonwebtoken"
 
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-import FroalaEditorComponent from 'react-froala-wysiwyg';
+
+import JoditEditor from "jodit-react";
 
 const  socket = openSocket('/');
 
@@ -143,7 +142,7 @@ export default function Reg() {
                                 </div>    
                                 <div>
                                     <h6>Register Your </h6>
-                                    <FroalaEditorComponent onModelChange={(e)=>{InputVal=e}} tag='textarea'/>
+                                    <JoditEditor  onChange={(e)=>{InputVal=e;console.log(e)}}></JoditEditor>
                                     <Button onClick={()=>{
                                         axios.post("./crud/",{
                                             action: "Add",
